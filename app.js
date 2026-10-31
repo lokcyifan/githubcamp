@@ -48,9 +48,9 @@ function updateEmptyState(filteredTodos) {
     if (currentFilter === 'all') {
       emptyState.textContent = '還沒有任何待辦事項,新增一個吧!';
     } else if (currentFilter === 'active') {
-      emptyState.textContent = '目前沒有未完成的待辦事項。';
+      emptyState.textContent = '目前沒有未完成的待辦事項。項目仍然存在,請切換回「全部」查看。';
     } else {
-      emptyState.textContent = '目前沒有已完成的待辦事項。';
+      emptyState.textContent = '目前沒有已完成的待辦事項。項目仍然存在,請切換回「全部」查看。';
     }
     emptyState.hidden = false;
   } else {
