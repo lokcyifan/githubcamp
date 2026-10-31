@@ -222,8 +222,13 @@ h1 {
 
 .empty-state {
   margin: 16px 0 0;
+  padding: 12px 16px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
   text-align: center;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .app-footer {
