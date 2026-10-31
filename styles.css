@@ -6,12 +6,37 @@
 :root {
   --bg: #f4f5f7;
   --surface: #ffffff;
+  --surface-strong: #f6f8fa;
   --text: #1f2328;
   --text-muted: #656d76;
   --border: #d0d7de;
   --accent: #1f883d;
   --accent-hover: #1a7f37;
   --danger: #cf222e;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --toggle-bg: #e9ecef;
+  --toggle-text: #1f2328;
+  --filter-bg: #eef2f7;
+  --filter-active-bg: #dff7e7;
+  --filter-active-text: #1f883d;
+}
+
+body[data-theme='dark'] {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-strong: #1f2937;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --accent: #2ea043;
+  --accent-hover: #3fb950;
+  --danger: #ff7b72;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --toggle-bg: #21262d;
+  --toggle-text: #e6edf3;
+  --filter-bg: #1f2937;
+  --filter-active-bg: rgba(46, 160, 67, 0.2);
+  --filter-active-text: #7ee787;
 }
 
 body {
@@ -24,6 +49,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .app {
@@ -33,13 +59,45 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  margin: 0 0 20px;
+  margin: 0;
   font-size: 1.5rem;
   text-align: center;
+  flex: 1;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--toggle-text);
+  background: var(--toggle-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.theme-toggle__icon {
+  font-size: 1rem;
 }
 
 .todo-form {
@@ -79,6 +137,35 @@ h1 {
   background: var(--accent-hover);
 }
 
+.filter-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--filter-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background: var(--filter-active-bg);
+  color: var(--filter-active-text);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+}
+
 .todo-list {
   list-style: none;
   margin: 0;
@@ -93,7 +180,7 @@ h1 {
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  background: var(--bg);
+  background: var(--surface-strong);
   border: 1px solid var(--border);
   border-radius: 8px;
 }
@@ -165,7 +252,16 @@ h1 {
     padding: 16px;
   }
 
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .todo-form {
     flex-direction: column;
+  }
+
+  .filter-group {
+    flex-wrap: wrap;
   }
 }
