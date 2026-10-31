@@ -12,6 +12,7 @@ const emptyState = document.getElementById('empty-state');
 const remainingCount = document.getElementById('remaining-count');
 const themeToggle = document.getElementById('theme-toggle');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const clearCompletedButton = document.getElementById('clear-completed');
 
 let todos = loadTodos();
 let currentFilter = 'all';
@@ -58,6 +59,13 @@ function updateEmptyState(filteredTodos) {
   }
 }
 
+function updateClearCompletedButton() {
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  const shouldShowButton = completedCount > 0;
+  clearCompletedButton.hidden = !shouldShowButton;
+  clearCompletedButton.disabled = !shouldShowButton;
+}
+
 function render() {
   list.replaceChildren();
 
@@ -91,6 +99,7 @@ function render() {
 
   const remaining = todos.filter((todo) => !todo.completed).length;
   remainingCount.textContent = `未完成:${remaining} 項`;
+  updateClearCompletedButton();
 }
 
 function createId() {
@@ -117,6 +126,22 @@ function toggleTodo(id) {
 
 function deleteTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
+  saveTodos();
+  render();
+}
+
+function clearCompletedTodos() {
+  const completedTodos = todos.filter((todo) => todo.completed);
+  if (completedTodos.length === 0) {
+    return;
+  }
+
+  const confirmed = window.confirm('確定要清除所有已完成的待辦事項嗎？這個動作無法復原。');
+  if (!confirmed) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
   saveTodos();
   render();
 }
@@ -201,6 +226,8 @@ filterButtons.forEach((button) => {
     setFilter(button.dataset.filter);
   });
 });
+
+clearCompletedButton.addEventListener('click', clearCompletedTodos);
 
 initializeTheme();
 render();

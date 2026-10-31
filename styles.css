@@ -230,9 +230,42 @@ h1 {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
-  text-align: center;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+.btn-clear-completed {
+  padding: 7px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--danger);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-clear-completed:hover:not(:disabled) {
+  background: rgba(207, 34, 46, 0.08);
+  border-color: var(--danger);
+  transform: translateY(-1px);
+}
+
+.btn-clear-completed:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-clear-completed[hidden] {
+  display: none;
 }
 
 .sr-only {
